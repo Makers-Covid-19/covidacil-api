@@ -5,14 +5,12 @@ import com.rfbsoft.repository.ProvinceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+
 @RequestMapping(ProvinceController.CONTROLLER_PATH)
 public class ProvinceController {
     public static final String CONTROLLER_PATH = "api/v0/provinces";
@@ -21,11 +19,13 @@ public class ProvinceController {
     ProvinceRepository repo;
 
     @GetMapping
+
     public List<Province> get() {
         return repo.findAll();
     }
 
     @GetMapping("/{id}")
+
     public ResponseEntity getOne(@PathVariable Long id) {
 
         boolean existProvince = repo.existsById(id);

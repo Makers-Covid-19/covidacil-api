@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+
 @RequestMapping(CategoryController.CONTROLLER_PATH)
 public class CategoryController {
     public static final String CONTROLLER_PATH = "api/v0/categories";

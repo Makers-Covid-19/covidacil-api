@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+
 @RequestMapping(NeighborhoodController.CONTROLLER_PATH)
 public class NeighborhoodController {
     public static final String CONTROLLER_PATH = "api/v0/neighborhoods";

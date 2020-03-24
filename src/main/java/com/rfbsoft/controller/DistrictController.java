@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+
 @RequestMapping(DistrictController.CONTROLLER_PATH)
 public class DistrictController {
     public static final String CONTROLLER_PATH = "api/v0/districts";
