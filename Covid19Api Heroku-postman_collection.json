@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "8b905f2d-82d2-4139-bdab-2d483f71449d",
+		"name": "Covid19Api Heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Provinces",
+			"item": [
+				{
+					"name": "Get all Provinces",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/provinces",
+							"protocol": "https",
+							"host": [
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v0",
+								"provinces"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "District",
+			"item": [
+				{
+					"name": "Get specific id District",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/districts/16",
+							"protocol": "https",
+							"host": [
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v0",
+								"districts",
+								"16"
+							]
+						},
+						"description": "One getter"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Neighborhood",
+			"item": [
+				{
+					"name": "Get Specific id Neighborhood",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/neighborhoods/1535",
+							"protocol": "https",
+							"host": [
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v0",
+								"neighborhoods",
+								"1535"
+							]
+						},
+						"description": "one getter"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Phones",
+			"item": [
+				{
+					"name": "Add Phone ",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t \"name\": \"ahmet\",\r\n    \"phoneNumber\": \"05388451425\",\r\n    \"districtId\":\"\",\r\n     \"provinceId\":\"16\",\r\n    \"neighborhoodId\":\"\",\r\n    \"categoryId\":\"0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/phones",
+							"protocol": "https",
+							"host": [
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v0",
+								"phones"
+							]
+						},
+						"description": "First Exec NeighborHood id\r\nsecodn Distric id\r\nthird province id\r\n\r\nString name;\r\n    String phoneNumber;\r\n    Long districId;\r\n    Long \"provinceId\";\r\n    Long neighborhoodId;\r\n    Long categoryId;"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete phone",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/phones",
+							"protocol": "https",
+							"host": [
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v0",
+								"phones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Phone",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 6,\r\n    \"name\": \"Ayşe\",\r\n    \"no\":\"05365412545\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/phones",
+							"protocol": "https",
+							"host": [
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v0",
+								"phones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gett All Phones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/phones",
+							"protocol": "https",
+							"host": [
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v0",
+								"phones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one Getter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/phones/4248",
+							"protocol": "https",
+							"host": [
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v0",
+								"phones",
+								"4248"
+							]
+						},
+						"description": "paramer = neighborhood id"
+					},
+					"response": []
+				},
+				{
+					"name": "withId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/phones/id?province_id=0",
+							"protocol": "https",
+							"host": [
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v0",
+								"phones",
+								"id"
+							],
+							"query": [
+								{
+									"key": "neighborhood_id",
+									"value": "aaaa",
+									"disabled": true
+								},
+								{
+									"key": "district_id",
+									"value": "15",
+									"disabled": true
+								},
+								{
+									"key": "province_id",
+									"value": "0"
+								}
+							]
+						},
+						"description": "url Parameters\n\nprovince_id\ndistrict_id\nneighborhood_id\n\nif neighborhood_id exist, first execute\nsecond district_id\nthird provice_id"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "http://localhost:8081/api/v0/provinces",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n       \r\n        \"name\": \"A101\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v0/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v0",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/api/v0/provinces",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 1,\r\n        \"name\": \"Muhtar\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v0/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v0",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/api/v0/provinces",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 0,\r\n        \"name\": \"A101\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/v0/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v0",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/api/v0/provinces",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/categories",
+							"protocol": "https",
+							"host": [
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"api",
+								"v0",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b3aff877-a5b5-4c79-9ac3-025c57506f97",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6b8051d4-ca8e-40c3-b33c-38727f4174c9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

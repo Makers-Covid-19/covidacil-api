@@ -1,0 +1,96 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.5.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+//git init
+//git add .
+//		git commit -m "Demo"
+//heroku create
+//git push heroku master
+
+
+ext {
+	projectName = "RestFullApi"
+	projectVersion = '0.0.1-SNAPSHOT'
+	mainClass = 'com.rfbsoft.SpringRestFull'
+
+}
+group = 'com.rfbsoft'
+version = projectVersion
+sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.5.RELEASE'
+	// Use MySQL Connector-J
+	compile 'mysql:mysql-connector-java'
+	compile("org.springframework.boot:spring-boot-devtools")
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+
+
+
+jar {
+	archivesBaseName = projectName
+	version = projectVersion
+	manifest {
+		attributes "Main-Class": mainClass
+		attributes "Class-Path": configurations.runtime.files.collect { "libs/$it.name" }.join(' ')
+	}
+
+	// bu alttaki from kısmı eklenen classpathları direk har içine fat jar olrak gömer
+//    from {
+//        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
+}
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
+// compile edilenleri veya eklenen libararileri direk jarın yanına kopyalar
+// sonra eğer librarileri kulanıyorsan classpatha eklemek için manifest dosyasına classpath diye belirtmen gerekmekte
+// Class-Path: jsoup-1.11.3.jar bu şekilde ekleycen manifest dosyasına
+task copyToLib(type: Copy) {
+	into "$buildDir/libs/libs"
+	from(configurations.compile)
+}
+
+
+task writeProc()  {
+
+
+	doLast {
+		new File(projectDir, "Procfile").text = "web: java -Dserver.port=\$PORT -jar build/libs/"+ projectName +"-"+ projectVersion+".jar"
+	}
+}
+stage.dependsOn(writeProc)
+stage.dependsOn(copyToLib)
+
+test {
+	useJUnitPlatform()
+}
+
