@@ -13,10 +13,26 @@ Bu endpoint ile verilen il plaka koduna göre ilçe isimlerine ulaşım sağlana
 *https://rocky-reef-05857.herokuapp.com/api/v0/neighborhoods/{ilçe id}
 Bu endpoint ile verilen ilçe id sine göre mahalle isimleri listelenmektedir.
 
-Telefon numaralarına ulaşmak için farklı farklı yollar mevcuttur.
+Telefon numaralarına ulaşmak için farklı yollar mevcut.
 
 1.https://rocky-reef-05857.herokuapp.com/api/v0/phones
 Bu endpoint sistemde kayıtlı olan bütün telefon numaralarını listeler
+
+
+2.https://rocky-reef-05857.herokuapp.com/api/v0/phones/id
+Bu endpointe url parametre olarak üç adet id göndererek gönderdiğiniz 
+id 'de bulunan telefon numaraları geri döndürür.
+
+province_id -> verildiği zaman ilde bulunan bütün numaralar
+
+district_id -> verildiği zaman ilçede bulunan bütün numaralar geri döner
+
+neighborhood_id -> verildiği zaman mahallede bulunan bütün telefon numaraları döner
+
+hepsi birden verildiği zaman ilk olarak mahalle sonra ilçe en son il dikkate alınır.
+
+* https://rocky-reef-05857.herokuapp.com/api/v0/phones/{mahalle id}
+mahalle id gönderilerek mahalleye ait telefon numarasına ulaşabilirsiniz
 
 
 
