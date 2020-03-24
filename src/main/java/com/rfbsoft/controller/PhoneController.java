@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@CrossOrigin(maxAge = 3600)
 @RequestMapping(PhoneController.CONTROLLER_PATH)
 public class PhoneController {
     public static final String CONTROLLER_PATH = "api/v0/phones";
