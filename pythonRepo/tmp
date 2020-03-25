@@ -1,0 +1,33 @@
+with open('./Tablolar_Ayrı/ilce.json', encoding="utf8") as f:
+    data = json.load(f)
+    index = 1
+    for i in data:
+        name = i["ilce_title"]
+        key = i["ilce_key"]
+        sehirkey = i["ilce_sehirkey"]
+
+        
+        val = (key, name, sehirkey)
+        rows.append(val)
+        print(val)
+        
+        index += 1
+
+
+
+
+
+
+
+def multiple_insert(cursor, table, cols, rows):
+    sql_insert = 'INSERT INTO %s(%s) values %s' % (
+        table,
+        ','.join(cols),
+        ','.join('(%s , %s)' for _ in rows)
+    )
+    values = [_ for r in rows for _ in r]
+    cursor.execute(sql_insert, values)
+
+
+multiple_insert(mycursor, 'district', ('id', 'name', 'distric_key'), rows)
+print(mycursor.rowcount, "record inserted.")
