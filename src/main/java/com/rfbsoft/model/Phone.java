@@ -23,6 +23,8 @@ public class Phone {
     @OneToOne
     private Category category;
 
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "neighborhood_id", updatable = false)
     private Neighborhood neighborhood;
@@ -34,6 +36,15 @@ public class Phone {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "distric_id", updatable = false)
     private District district;
+
+
+    public Neighborhood getNeighborhood() {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(Neighborhood neighborhood) {
+        this.neighborhood = neighborhood;
+    }
 
     public Province getProvince() {
         return province;
@@ -50,6 +61,9 @@ public class Phone {
     public void setDistrict(District district) {
         this.district = district;
     }
+
+
+
 
     public Category getCategory() {
         return category;
@@ -76,13 +90,7 @@ public class Phone {
         this.no = no;
     }
 
-    public Neighborhood getNeighborhood() {
-        return neighborhood;
-    }
 
-    public void setNeighborhood(Neighborhood neighborhood) {
-        this.neighborhood = neighborhood;
-    }
 
 
     public Long getId() {

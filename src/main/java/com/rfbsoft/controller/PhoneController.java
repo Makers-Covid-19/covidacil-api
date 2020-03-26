@@ -11,8 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping(PhoneController.CONTROLLER_PATH)
@@ -34,7 +37,6 @@ public class PhoneController {
     @Autowired
     CategoryRepository categoryRepository;
 
-
     @GetMapping
     public List<Phone> get() {
         return repo.findAll();
@@ -47,6 +49,7 @@ public class PhoneController {
             @RequestParam(required = false, name = "neighborhood_id") String neighborhoodId) {
 
         Long id;
+        List phones = new ArrayList();
 
         if (neighborhoodId != null) {
             if (Utils.isValidLong(neighborhoodId)) {
@@ -57,8 +60,20 @@ public class PhoneController {
                 return new ResponseEntity("Neighborhood not found", HttpStatus.NOT_FOUND);
             }
             Neighborhood neighborhood = neighborhoodRepository.findById(id).get();
+            neighborhood.getPhones().forEach(phone -> phones.add(phone));
 
-            List phones = neighborhood.getPhones();
+            District district = neighborhood.getDistrict();
+
+            district.getPhones().stream()
+                    .filter(phone -> phone.getNeighborhood() == null)
+                    .forEach(phone -> phones.add(phone));
+
+            Province province = district.getProvince();
+
+            province.getPhones().stream()
+                    .filter(phone -> phone.getDistrict() == null)
+                    .forEach(phone -> phones.add(phone));
+
             return ResponseEntity.ok(phones);
         }
         if (districtId != null) {
@@ -70,9 +85,15 @@ public class PhoneController {
             if (!exist) {
                 return new ResponseEntity("District not found", HttpStatus.NOT_FOUND);
             }
-            District neighborhood = districtRepository.findById(id).get();
+            District district = districtRepository.findById(id).get();
 
-            List phones = neighborhood.getPhones();
+            district.getPhones().forEach(phone -> phones.add(phone));
+
+            Province province = district.getProvince();
+            province.getPhones().stream()
+                    .filter(phone -> phone.getDistrict() == null)
+                    .forEach(phone -> phones.add(phone));
+
             return ResponseEntity.ok(phones);
 
         }
@@ -84,9 +105,9 @@ public class PhoneController {
             if (!exist) {
                 return new ResponseEntity("Province not found", HttpStatus.NOT_FOUND);
             }
-            Province neighborhood = provinceRepository.findById(id).get();
+            Province province = provinceRepository.findById(id).get();
 
-            Set phones = neighborhood.getPhones();
+            province.getPhones().forEach(phone -> phones.add(phone));
             return ResponseEntity.ok(phones);
 
         }
@@ -110,7 +131,9 @@ public class PhoneController {
         phone.setCategory(category);
 
 
+
         if (request.getNeighborhoodId() != null) {
+
 
             Long id = request.getNeighborhoodId();
 
@@ -118,17 +141,23 @@ public class PhoneController {
             if (!exist) {
                 return new ResponseEntity("Neighborhood not found", HttpStatus.NOT_FOUND);
             }
+
             Neighborhood neighborhood = neighborhoodRepository.findById(id).get();
-            phone.setNeighborhood(neighborhood);
             District district = neighborhood.getDistrict();
-            phone.setDistrict(district);
             Province province = district.getProvince();
+
+            phone.setNeighborhood(neighborhood);
+            phone.setDistrict(district);
             phone.setProvince(province);
             repo.save(phone);
             return ResponseEntity.ok(phone);
+
+
+
         }
 
         if (request.getDistrictId() != null) {
+
 
             Long id = request.getDistrictId();
 
@@ -138,16 +167,18 @@ public class PhoneController {
                 return new ResponseEntity("District not found", HttpStatus.NOT_FOUND);
             }
             District district = districtRepository.findById(id).get();
+            Province province = district.getProvince();
 
             phone.setDistrict(district);
-            Province province = district.getProvince();
             phone.setProvince(province);
             repo.save(phone);
             return ResponseEntity.ok(phone);
+
         }
 
 
         if (request.getProvinceId() != null) {
+
 
             Long id = request.getProvinceId();
 
@@ -159,7 +190,9 @@ public class PhoneController {
             phone.setProvince(province);
             repo.save(phone);
             return ResponseEntity.ok(phone);
+
         }
+
 
         return ResponseEntity.ok("Province - District or NeighborHood id not Found");
 

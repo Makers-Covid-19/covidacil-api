@@ -3,7 +3,9 @@ package com.rfbsoft.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,11 +22,11 @@ public class Province {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "province")
-    private Set<District> districts = new HashSet<>();
+    private Set<District> districts = new HashSet();
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "province")
-    private Set<Phone> phones = new HashSet<>();
+    private Set<Phone> phones = new HashSet();
 
     public Set<Phone> getPhones() {
         return phones;

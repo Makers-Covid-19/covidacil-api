@@ -18,7 +18,7 @@ public class Neighborhood {
     @JoinColumn(name = "distric_id", updatable = false)
     @JsonBackReference
     private District district;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "neighborhood")
     @JsonIgnore
     private List<Phone> phones = new ArrayList<>();
 
