@@ -1,10 +1,12 @@
 package com.rfbsoft.controller;
 
 
-import com.rfbsoft.Utils;
+import com.rfbsoft.exception.*;
 import com.rfbsoft.model.*;
-import com.rfbsoft.repository.*;
 import com.rfbsoft.request.PhoneAddRequest;
+import com.rfbsoft.response.SuccesResponse;
+import com.rfbsoft.service.*;
+import com.rfbsoft.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping(PhoneController.CONTROLLER_PATH)
@@ -23,23 +22,23 @@ public class PhoneController {
     public static final String CONTROLLER_PATH = "api/v0/phones";
 
     @Autowired
-    PhoneRepository repo;
+    PhoneService repo;
 
     @Autowired
-    NeighborhoodRepository neighborhoodRepository;
+    NeighborhoodService neighborhoodRepository;
 
     @Autowired
-    DistrictRepository districtRepository;
+    DistrictService districtRepository;
 
     @Autowired
-    ProvinceRepository provinceRepository;
+    ProvinceService provinceRepository;
 
     @Autowired
-    CategoryRepository categoryRepository;
+    CategoryService categoryRepository;
 
     @GetMapping
-    public List<Phone> get() {
-        return repo.findAll();
+    public ResponseEntity get() {
+        return ResponseEntity.ok(new SuccesResponse(repo.findAll()));
     }
 
     @GetMapping("/id")
@@ -48,17 +47,19 @@ public class PhoneController {
             @RequestParam(required = false, name = "district_id") String districtId,
             @RequestParam(required = false, name = "neighborhood_id") String neighborhoodId) {
 
-        Long id;
+        Long id = null;
         List phones = new ArrayList();
 
         if (neighborhoodId != null) {
             if (Utils.isValidLong(neighborhoodId)) {
                 id = Long.valueOf(neighborhoodId);
-            } else return ResponseEntity.ok("neighborhoodId not accepted");
+            } else new ResponseEntity(new BadRequestFound( neighborhoodId + " Not Valid Long"),
+                    HttpStatus.BAD_REQUEST);
             boolean exist = neighborhoodRepository.existsById(id);
             if (!exist) {
-                return new ResponseEntity("Neighborhood not found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity(new NeighborhoodNotFound(id), HttpStatus.NOT_FOUND);
             }
+
             Neighborhood neighborhood = neighborhoodRepository.findById(id).get();
             neighborhood.getPhones().forEach(phone -> phones.add(phone));
 
@@ -74,16 +75,18 @@ public class PhoneController {
                     .filter(phone -> phone.getDistrict() == null)
                     .forEach(phone -> phones.add(phone));
 
-            return ResponseEntity.ok(phones);
+            return ResponseEntity.ok(new SuccesResponse(phones));
         }
         if (districtId != null) {
             if (Utils.isValidLong(districtId)) {
                 id = Long.valueOf(districtId);
-            } else return ResponseEntity.ok("districtId not accepted");
+            } else
+                new ResponseEntity(new BadRequestFound( districtId + " Not Valid Long"),
+                        HttpStatus.BAD_REQUEST);
 
             boolean exist = districtRepository.existsById(id);
             if (!exist) {
-                return new ResponseEntity("District not found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity(new DistrictNotFound(id), HttpStatus.NOT_FOUND);
             }
             District district = districtRepository.findById(id).get();
 
@@ -94,24 +97,28 @@ public class PhoneController {
                     .filter(phone -> phone.getDistrict() == null)
                     .forEach(phone -> phones.add(phone));
 
-            return ResponseEntity.ok(phones);
+            return ResponseEntity.ok(new SuccesResponse(phones));
 
         }
         if (provinceId != null) {
             if (Utils.isValidLong(provinceId)) {
                 id = Long.valueOf(provinceId);
-            } else return ResponseEntity.ok("provinceId not accepted");
+            } else new ResponseEntity(new BadRequestFound(provinceId + " Not Valid Long"),
+                    HttpStatus.BAD_REQUEST);
             boolean exist = provinceRepository.existsById(id);
             if (!exist) {
-                return new ResponseEntity("Province not found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity(new ProvinceNotFound(id), HttpStatus.NOT_FOUND);
             }
             Province province = provinceRepository.findById(id).get();
 
             province.getPhones().forEach(phone -> phones.add(phone));
-            return ResponseEntity.ok(phones);
+            return ResponseEntity.ok(new SuccesResponse(phones));
 
         }
-        return ResponseEntity.ok("Please send Province - Distric or Neighborhood id");
+//        "Please send Province - Distric or Neighborhood id"
+        return new ResponseEntity(new BadRequestFound(
+                "Please send Province - Distric or Neighborhood id"),
+                HttpStatus.BAD_REQUEST);
 
     }
 
@@ -124,12 +131,11 @@ public class PhoneController {
 
         boolean existCategory = categoryRepository.existsById(request.getCategoryId());
         if (!existCategory) {
-            return new ResponseEntity("Category not found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new CategoryNotFound(request.getCategoryId()), HttpStatus.NOT_FOUND);
         }
         Category category = categoryRepository.findById(request.getCategoryId()).get();
 
         phone.setCategory(category);
-
 
 
         if (request.getNeighborhoodId() != null) {
@@ -139,7 +145,7 @@ public class PhoneController {
 
             boolean exist = neighborhoodRepository.existsById(id);
             if (!exist) {
-                return new ResponseEntity("Neighborhood not found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity(new NeighborhoodNotFound(id), HttpStatus.NOT_FOUND);
             }
 
             Neighborhood neighborhood = neighborhoodRepository.findById(id).get();
@@ -150,8 +156,7 @@ public class PhoneController {
             phone.setDistrict(district);
             phone.setProvince(province);
             repo.save(phone);
-            return ResponseEntity.ok(phone);
-
+            return ResponseEntity.ok(new SuccesResponse(phone));
 
 
         }
@@ -164,7 +169,7 @@ public class PhoneController {
 
             boolean exist = districtRepository.existsById(id);
             if (!exist) {
-                return new ResponseEntity("District not found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity(new DistrictNotFound(id), HttpStatus.NOT_FOUND);
             }
             District district = districtRepository.findById(id).get();
             Province province = district.getProvince();
@@ -172,7 +177,7 @@ public class PhoneController {
             phone.setDistrict(district);
             phone.setProvince(province);
             repo.save(phone);
-            return ResponseEntity.ok(phone);
+            return ResponseEntity.ok(new SuccesResponse(phone));
 
         }
 
@@ -184,17 +189,18 @@ public class PhoneController {
 
             boolean exist = provinceRepository.existsById(id);
             if (!exist) {
-                return new ResponseEntity("Province not found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity(new ProvinceNotFound(id), HttpStatus.NOT_FOUND);
             }
             Province province = provinceRepository.findById(id).get();
             phone.setProvince(province);
             repo.save(phone);
-            return ResponseEntity.ok(phone);
+            return ResponseEntity.ok(new SuccesResponse(phone));
 
         }
 
 
-        return ResponseEntity.ok("Province - District or NeighborHood id not Found");
+        return new ResponseEntity(new BadRequestFound("Province - District or NeighborHood id not Found"),
+                HttpStatus.BAD_REQUEST);
 
 
 //        boolean existNeighborhood = neighborhoodRepository.existsById(neighborhoodId);
@@ -217,19 +223,19 @@ public class PhoneController {
     @PutMapping
     public ResponseEntity update(@Valid @RequestBody Phone phone) {
         boolean exist = repo.existsById(phone.getId());
-        if(!exist){
-            ResponseEntity.ok("Phone not found");
+        if (!exist) {
+            new ResponseEntity(new PhoneNotFound(phone.getId()), HttpStatus.NOT_FOUND);
         }
         Phone tmp = repo.findById(phone.getId()).get();
         tmp.setName(phone.getName());
         tmp.setNo(phone.getNo());
-        return new ResponseEntity(repo.save(tmp), HttpStatus.OK);
+        return ResponseEntity.ok(new SuccesResponse(repo.save(tmp)));
     }
 
     @DeleteMapping
     public ResponseEntity<?> delete(@Valid @RequestBody Phone phone) {
         repo.delete(phone);
-        return ResponseEntity.ok("deleted");
+        return ResponseEntity.ok(new SuccesResponse("Succesfuly deleted"));
     }
 
 }

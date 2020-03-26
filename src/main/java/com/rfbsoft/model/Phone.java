@@ -24,7 +24,6 @@ public class Phone {
     private Category category;
 
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "neighborhood_id", updatable = false)
     private Neighborhood neighborhood;
@@ -63,8 +62,6 @@ public class Phone {
     }
 
 
-
-
     public Category getCategory() {
         return category;
     }
@@ -89,8 +86,6 @@ public class Phone {
     public void setNo(String no) {
         this.no = no;
     }
-
-
 
 
     public Long getId() {

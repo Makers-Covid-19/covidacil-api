@@ -1,4 +1,4 @@
-package com.rfbsoft;
+package com.rfbsoft.utils;
 
 public class Utils {
     public static boolean isValidLong(String str) {
