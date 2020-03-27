@@ -1,0 +1,7 @@
+[{"id":25, "name":"B\u00fcy\u00fck\u015fehir Belediye", "no":"4441066", "category_id":0, "distric_id":0, "neighborhood_id":0, "province_id":10, "ınstitution_id":0},
+ {"id":26, "name":"Ambulans", "no":"112", "category_id":4, "distric_id":0, "neighborhood_id":0, "province_id":0, "ınstitution_id":0},
+ {"id":27, "name":"Polis", "no":"155", "category_id":4, "distric_id":0, "neighborhood_id":0, "province_id":0, "ınstitution_id":0},
+ {"id":28, "name":"Jandarma", "no":"156", "category_id":4, "distric_id":0, "neighborhood_id":0, "province_id":0, "ınstitution_id":0},
+ {"id":29, "name":"Corona Dan\u0131\u015fma Hatt\u0131", "no":"184", "category_id":4, "distric_id":0, "neighborhood_id":0, "province_id":0, "ınstitution_id":0},
+ {"id":32, "name":"SMO", "no":"05425287131", "category_id":1, "distric_id":1161, "neighborhood_id":0, "province_id":10, "ınstitution_id":0},
+ {"id":33, "name":"SMO", "no":"05442926812", "category_id":1, "distric_id":1161, "neighborhood_id":0, "province_id":10, "ınstitution_id":0}]

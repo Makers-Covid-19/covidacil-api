@@ -1,0 +1,26 @@
+[
+	{
+		"id" : 0,
+		"name" : "Tüm ihtiyaçlar"
+	},
+	{
+		"id" : 1,
+		"name" : "Manav"
+	},
+	{
+		"id" : 2,
+		"name" : "Maaş ve faturalar"
+	},
+	{
+		"id" : 3,
+		"name" : "Alışveriş"
+	},
+	{
+		"id" : 4,
+		"name" : "Koordinasyon"
+	},
+	{
+		"id" : 5,
+		"name" : "Psikolojik destek"
+	}
+]
