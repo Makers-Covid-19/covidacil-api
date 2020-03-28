@@ -1,5 +1,16 @@
 # Covid Acil Api
 
+Deployment için build klasörü içerisindeki jar dosyası ve üzerindeki lib klasörünün
+aynı dizinde bulunmasına dikkat ettikten sonra run.bat içrisindeki
+komut cmd den verilerek uygulama çalıştırılabilir.
+Port ayarlamak için run.bat içerisindeki -Dserver.port=8090 değişkenindeki
+port numarası ayarlanabilir.
+çalıştırmak için komuta ayrıca
+
+java -Dserver.port=8090 -jar RestFullApi-0.0.1-SNAPSHOT.jar
+
+serverde jre yüklü olmalıdır.
+
 Bu proje Covid Acil uygulaması için veri sunmaktadır.
 
 Endpointler:
