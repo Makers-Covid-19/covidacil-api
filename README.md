@@ -5,7 +5,7 @@ aynı dizinde bulunmasına dikkat ettikten sonra run.bat içrisindeki
 komut cmd den verilerek uygulama çalıştırılabilir.
 Port ayarlamak için run.bat içerisindeki -Dserver.port=8090 değişkenindeki
 port numarası ayarlanabilir.
-çalıştırmak için komuta ayrıca
+çalıştırmak için komut ayrıca
 
 java -Dserver.port=8090 -jar RestFullApi-0.0.1-SNAPSHOT.jar
 
