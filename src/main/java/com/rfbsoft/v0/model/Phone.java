@@ -10,11 +10,12 @@ import javax.persistence.*;
 @Table()
 
 
-public class Phone {
+public class Phone implements Comparable<Phone> {
 
     public static final String JsonNoValue = "phone";
 
     @Id
+    @OrderBy
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -102,4 +103,8 @@ public class Phone {
     }
 
 
+    @Override
+    public int compareTo(Phone o) {
+        return (int) (this.getId()-o.getId());
+    }
 }

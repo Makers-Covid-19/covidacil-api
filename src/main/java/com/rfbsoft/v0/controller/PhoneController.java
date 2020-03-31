@@ -65,6 +65,8 @@ public class PhoneController {
         categoryPhoneMap.clear();
 
         provinceRepository.findById((long) 0).get().getPhones().forEach(phone -> globalList.add(phone));
+
+
         if (neighborhoodId != null) {
             return processWithNeighborhoodId(neighborhoodId);
         }
@@ -109,6 +111,8 @@ public class PhoneController {
 
         provincePhones(district.getProvince());
 
+        sortLists();
+
         return ResponseEntity.ok(new SuccesResponse(new PhoneResponse(majorList, publicList, globalList)));
     }
 
@@ -133,8 +137,16 @@ public class PhoneController {
 
         provincePhones(district.getProvince());
 
+        sortLists();
+
 
         return ResponseEntity.ok(new SuccesResponse(new PhoneResponse(majorList, publicList, globalList)));
+    }
+
+    private void sortLists() {
+        globalList.sort(null);
+        majorList.sort(null);
+        publicList.sort(null);
     }
 
     private ResponseEntity processWithProvinceId(String provinceId) {
@@ -153,6 +165,8 @@ public class PhoneController {
         }
         Province province = provinceRepository.findById(id).get();
         provincePhones(province);
+
+        sortLists();
         return ResponseEntity.ok(new SuccesResponse(new PhoneResponse(majorList, publicList, globalList)));
     }
 
