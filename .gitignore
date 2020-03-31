@@ -4,7 +4,7 @@ HELP.md
 !**/src/main/**
 !**/src/test/**
 
-build/
+/build/
 
 
 
