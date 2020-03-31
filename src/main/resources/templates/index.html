@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone add Page</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" id="app">
+    <form v-on:submit.prevent>
+
+        <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input v-model = "phoneNumber" type="tel" class="form-control" id="phoneNumber" aria-describedby="emailHelp" placeholder="Enter Phone Number">
+        </div>
+        <div class="form-group">
+            <label for="phoneName">Phone Name</label>
+            <input v-model = "phoneName" type="text" class="form-control" id="phoneName" placeholder="Enter Phone Name">
+        </div>
+        <div class="form-group">
+            <label for="province">Select Province</label>
+            <select @change="loadDistricts()" id="province" v-model="selectedProvince">
+                <option v-for="province in provinces" v-bind:value="province">
+                    {{ province.name }}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="district">Select District</label>
+            <select  id="district" v-model="selectedDistrict">
+                <option v-for="district in provincesDistricts" v-bind:value="district">
+                    {{ district.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Select Category</label>
+            <select  id="category" v-model="selectedCategory">
+                <option v-for="category in categories" v-bind:value="category">
+                    {{ category.name }}
+                </option>
+            </select>
+        </div>
+        <div class="row">
+            <textarea   v-if = "warningText" class="col alert alert-warning" role="alert">
+                {{warningText}}
+            </textarea>
+
+        </div>
+
+        <div class="row">
+            <textarea   v-if = "succes" class="col alert alert-success" role="alert">
+                {{succes}}
+            </textarea>
+
+        </div>
+
+        <button :disabled = "!(phoneNumber && phoneName) " v-on:click="send()" class="btn btn-primary">Send</button>
+    </form>
+</div>
+
+<style>
+    #app {
+        margin: 0 auto;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+
+
+</body>
+
+</html>
