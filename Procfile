@@ -1,1 +1,0 @@
-java -Dserver.port=$PORT -jar RestFullApi-0.0.1-SNAPSHOT.jar

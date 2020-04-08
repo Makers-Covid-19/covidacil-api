@@ -2,6 +2,7 @@ package com.rfbsoft.v0.controller;
 
 import com.rfbsoft.v0.Info;
 import com.rfbsoft.v0.exception.ProvinceNotFound;
+import com.rfbsoft.v0.model.District;
 import com.rfbsoft.v0.model.Province;
 import com.rfbsoft.v0.response.SuccesResponse;
 import com.rfbsoft.v0.service.DistrictService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -42,7 +45,14 @@ public class DistrictController {
         Province province = provinceRepository.findById(id).get();
 
         Set districts = province.getDistricts();
-        return ResponseEntity.ok(new SuccesResponse(districts));
+        List districtList = new ArrayList();
+        districts.forEach((district)->{
+            districtList.add(district);
+        });
+
+        districtList.sort(null);
+
+        return ResponseEntity.ok(new SuccesResponse(districtList));
     }
 
 //    @PostMapping("/{provinceId}")

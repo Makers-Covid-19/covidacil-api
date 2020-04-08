@@ -1,64 +1,14 @@
-[{
-        "id": 25,
-        "name": "B\u00fcy\u00fck\u015fehir Belediye",
-        "no": "4441066",
-        "category_id": 0,
-        "distric_id": 0,
-        "neighborhood_id": 0,
-        "province_id": 10
-    },
-    {
-        "id": 26,
-        "name": "Ambulans",
-        "no": "112",
-        "category_id": 4,
-        "distric_id": 0,
-        "neighborhood_id": 0,
-        "province_id": 0
-    },
-    {
-        "id": 27,
-        "name": "Polis",
-        "no": "155",
-        "category_id": 4,
-        "distric_id": 0,
-        "neighborhood_id": 0,
-        "province_id": 0
-    },
-    {
-        "id": 28,
-        "name": "Jandarma",
-        "no": "156",
-        "category_id": 4,
-        "distric_id": 0,
-        "neighborhood_id": 0,
-        "province_id": 0
-    },
-    {
-        "id": 29,
-        "name": "Corona Dan\u0131\u015fma Hatt\u0131",
-        "no": "184",
-        "category_id": 4,
-        "distric_id": 0,
-        "neighborhood_id": 0,
-        "province_id": 0
-    },
-    {
-        "id": 32,
-        "name": "SMO",
-        "no": "05425287131",
-        "category_id": 1,
-        "distric_id": 1161,
-        "neighborhood_id": 0,
-        "province_id": 10
-    },
-    {
-        "id": 33,
-        "name": "SMO",
-        "no": "05442926812",
-        "category_id": 1,
-        "distric_id": 1161,
-        "neighborhood_id": 0,
-        "province_id": 10
-    }
-]
+[{"id":17, "name":"B\u00fcy\u00fck\u015fehir Belediyesi", "no":"4441066", "category_id":0, "neighborhood_id":0, "distric_id":0, "province_id":10},
+ {"id":18, "name":"Ambulans", "no":"112", "category_id":6, "neighborhood_id":0, "distric_id":0, "province_id":0},
+ {"id":19, "name":"Polis", "no":"155", "category_id":6, "neighborhood_id":0, "distric_id":0, "province_id":0},
+ {"id":20, "name":"Jandarma", "no":"156", "category_id":6, "neighborhood_id":0, "distric_id":0, "province_id":0},
+ {"id":21, "name":"Corona Dan\u0131\u015fma Hatt\u0131", "no":"184", "category_id":6, "neighborhood_id":0, "distric_id":0, "province_id":0},
+ {"id":22, "name":"Smo", "no":"05425287136", "category_id":1, "neighborhood_id":0, "distric_id":1161, "province_id":10},
+ {"id":24, "name":"Ayval\u0131k Yerel \u0130nsiyatif", "no":"05326682864", "category_id":4, "neighborhood_id":0, "distric_id":1161, "province_id":10},
+ {"id":25, "name":"Belediye", "no":"05051565535", "category_id":3, "neighborhood_id":0, "distric_id":1161, "province_id":10},
+ {"id":26, "name":"Belediye", "no":"05323703558", "category_id":3, "neighborhood_id":0, "distric_id":1161, "province_id":10},
+ {"id":27, "name":"Belediye", "no":"05058067714", "category_id":3, "neighborhood_id":0, "distric_id":1161, "province_id":10},
+ {"id":28, "name":"Belediye", "no":"05453475712", "category_id":3, "neighborhood_id":0, "distric_id":1161, "province_id":10},
+ {"id":29, "name":"Kaymakaml\u0131k", "no":"02663121040", "category_id":3, "neighborhood_id":0, "distric_id":1161, "province_id":10},
+ {"id":30, "name":"\u0130l\u00e7e Sa\u011fl\u0131k M\u00fcd\u00fcrl\u00fc\u011f\u00fc", "no":"02663123928", "category_id":5, "neighborhood_id":0, "distric_id":1161, "province_id":10},
+ {"id":31, "name":"\u0130l\u00e7e Emniyet M\u00fcd\u00fcrl\u00fc\u011f\u00fc", "no":"02663129500", "category_id":2, "neighborhood_id":0, "distric_id":1161, "province_id":10}]

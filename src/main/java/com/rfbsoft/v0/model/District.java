@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class District {
+public class District implements Comparable<District>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -71,5 +71,10 @@ public class District {
 
     public void setProvince(Province province) {
         this.province = province;
+    }
+
+    @Override
+    public int compareTo(District o) {
+        return this.getName().compareTo(o.getName());
     }
 }
