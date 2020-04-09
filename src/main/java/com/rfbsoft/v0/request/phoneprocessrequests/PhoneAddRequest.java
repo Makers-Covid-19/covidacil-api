@@ -1,4 +1,4 @@
-package com.rfbsoft.v0.request;
+package com.rfbsoft.v0.request.phoneprocessrequests;
 
 public class PhoneAddRequest {
     String name;

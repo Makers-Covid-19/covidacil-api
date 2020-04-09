@@ -4,7 +4,7 @@ package com.rfbsoft.v0.controller;
 import com.rfbsoft.v0.Info;
 import com.rfbsoft.v0.exception.*;
 import com.rfbsoft.v0.model.*;
-import com.rfbsoft.v0.request.PhoneAddRequest;
+import com.rfbsoft.v0.request.phoneprocessrequests.PhoneAddRequest;
 import com.rfbsoft.v0.response.PhoneResponse;
 import com.rfbsoft.v0.response.SuccesResponse;
 import com.rfbsoft.v0.service.*;
@@ -22,6 +22,7 @@ import java.util.List;
 @RequestMapping(PhoneController.CONTROLLER_PATH)
 public class PhoneController {
     public static final String CONTROLLER_PATH = "api/" + Info.VERSION + "/phones";
+    private final String eroorNotifiedPath = "unrequitedNumber";
 
     @Autowired
     PhoneService repo;
@@ -298,6 +299,22 @@ public class PhoneController {
 
     }
 
+//    @GetMapping("/{id}")
+//    public ResponseEntity getOne(@PathVariable Long id) {
+
+    @PutMapping(eroorNotifiedPath+ "/{id}")
+    private ResponseEntity errorNotified(@PathVariable Long id) {
+        boolean exist = repo.existsById(id);
+        if (!exist) {
+            PhoneNotFound phoneNotFound = new PhoneNotFound(id);
+            new ResponseEntity(phoneNotFound, phoneNotFound.getHttpStatus());
+        }
+        Phone tmp = repo.findById(id).get();
+        int errorNotificationCount = tmp.getErrorNotificationCount();
+        tmp.setErrorNotificationCount(++errorNotificationCount);
+        return ResponseEntity.ok(new SuccesResponse(repo.save(tmp)));
+    }
+
     @PutMapping
     public ResponseEntity update(@Valid @RequestBody Phone phone) {
         boolean exist = repo.existsById(phone.getId());
@@ -306,9 +323,25 @@ public class PhoneController {
             new ResponseEntity(phoneNotFound, phoneNotFound.getHttpStatus());
         }
         Phone tmp = repo.findById(phone.getId()).get();
-        tmp.setName(phone.getName());
-        tmp.setNo(phone.getNo());
-        return ResponseEntity.ok(new SuccesResponse(repo.save(tmp)));
+        if (phone.getName() != null) tmp.setName(phone.getName());
+        if (phone.getNo() != null) tmp.setNo(phone.getNo());
+
+        if (phone.getNeighborhood() != null) {
+            tmp.setNeighborhood(phone.getNeighborhood());
+        }
+        if (phone.getDistrict() != null){
+
+        }
+            tmp.setDistrict(phone.getDistrict());
+        if (phone.getProvince() != null) {
+            tmp.setProvince(phone.getProvince());
+        }
+
+        if (phone.getCategory() != null) tmp.setCategory(phone.getCategory());
+        if (phone.getErrorNotificationCount() != 0) tmp.setErrorNotificationCount(phone.getErrorNotificationCount());
+
+        Phone save = repo.save(tmp);
+        return ResponseEntity.ok(new SuccesResponse(save));
     }
 
     @DeleteMapping

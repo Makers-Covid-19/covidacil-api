@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "8b905f2d-82d2-4139-bdab-2d483f71449d",
-		"name": "Covid19Api Heroku",
+		"name": "Covid19Api Deploy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -14,11 +14,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/provinces",
+							"raw": "https://api.covidacil.com/api/v0/provinces",
 							"protocol": "https",
 							"host": [
-								"rocky-reef-05857",
-								"herokuapp",
+								"api",
+								"covidacil",
 								"com"
 							],
 							"path": [
@@ -42,11 +42,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/districts/16",
+							"raw": "https://api.covidacil.com/api/v0/districts/16",
 							"protocol": "https",
 							"host": [
-								"rocky-reef-05857",
-								"herokuapp",
+								"api",
+								"covidacil",
 								"com"
 							],
 							"path": [
@@ -72,18 +72,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/neighborhoods/1535",
+							"raw": "https://api.covidacil.com/api/v0/neighborhoods/300000",
 							"protocol": "https",
 							"host": [
-								"rocky-reef-05857",
-								"herokuapp",
+								"api",
+								"covidacil",
 								"com"
 							],
 							"path": [
 								"api",
 								"v0",
 								"neighborhoods",
-								"1535"
+								"300000"
 							]
 						},
 						"description": "one getter"
@@ -103,7 +103,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t \"name\": \"ahmet\",\r\n    \"phoneNumber\": \"05388451425\",\r\n    \"districtId\":\"\",\r\n     \"provinceId\":\"16\",\r\n    \"neighborhoodId\":\"\",\r\n    \"categoryId\":\"0\"\r\n}",
+							"raw": "{\r\n\t\"name\"\t\t\t\t: \"Smo\",\r\n    \"phoneNumber\"\t\t: \"05442926812\",\r\n    \"districtId\"\t\t:\"1161\",\r\n    \"provinceId\"\t\t:\"\",\r\n    \"neighborhoodId\"\t:\"\",\r\n    \"categoryId\"\t\t:\"1\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -166,7 +166,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 6,\r\n    \"name\": \"Ayşe\",\r\n    \"no\":\"05365412545\"\r\n    \r\n}",
+							"raw": "{\r\n    \"id\": 35,\r\n    \"name\": \"Nilüfer\",\r\n    \"phone\":\"05487654758\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -218,11 +218,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/phones/4248",
+							"raw": "https://api.covidacil.com/api/v0/phones/4248",
 							"protocol": "https",
 							"host": [
-								"rocky-reef-05857",
-								"herokuapp",
+								"api",
+								"covidacil",
 								"com"
 							],
 							"path": [
@@ -242,7 +242,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/phones/id?province_id=0",
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/phones/id?district_id=1161",
 							"protocol": "https",
 							"host": [
 								"rocky-reef-05857",
@@ -258,21 +258,45 @@
 							"query": [
 								{
 									"key": "neighborhood_id",
-									"value": "aaaa",
-									"disabled": true
-								},
-								{
-									"key": "district_id",
 									"value": "15",
 									"disabled": true
 								},
 								{
+									"key": "district_id",
+									"value": "1161"
+								},
+								{
 									"key": "province_id",
-									"value": "0"
+									"value": "10",
+									"disabled": true
 								}
 							]
 						},
 						"description": "url Parameters\n\nprovince_id\ndistrict_id\nneighborhood_id\n\nif neighborhood_id exist, first execute\nsecond district_id\nthird provice_id"
+					},
+					"response": []
+				},
+				{
+					"name": "Notify Unrequited Number",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/v0/phones/unrequitedNumber/35",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v0",
+								"phones",
+								"unrequitedNumber",
+								"35"
+							]
+						},
+						"description": "api/v0/phones/unrequitedNumber put request with id data"
 					},
 					"response": []
 				}
@@ -289,7 +313,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n       \r\n        \"name\": \"A101\"\r\n    }",
+							"raw": "{\r\n       \r\n        \"name\": \"Muhtar\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -297,12 +321,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/api/v0/categories",
-							"protocol": "http",
+							"raw": "https://rocky-reef-05857.herokuapp.com/api/v0/categories",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"rocky-reef-05857",
+								"herokuapp",
+								"com"
 							],
-							"port": "8081",
 							"path": [
 								"api",
 								"v0",

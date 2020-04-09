@@ -42,3 +42,9 @@ hepsi birden verildiği zaman ilk olarak mahalle sonra ilçe en son il dikkate a
 
 - https://rocky-reef-05857.herokuapp.com/api/v0/phones/{mahalle id}
   mahalle id gönderilerek mahalleye ait telefon numarasına ulaşabilirsiniz
+  
+  
+PUT - /api/v0/phones/unrequitedNumber/{phone_id}
+örneğin PUT /api/v0/phones/unrequitedNumber/35
+Hatalı numara bildirmek için kullanılması gereken endpoint
+

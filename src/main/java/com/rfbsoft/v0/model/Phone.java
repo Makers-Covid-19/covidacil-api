@@ -28,6 +28,9 @@ public class Phone implements Comparable<Phone> {
     @OneToOne
     private Category category;
 
+    @Column(columnDefinition = "int default 0")
+    private int errorNotificationCount;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "neighborhood_id", updatable = false)
@@ -41,6 +44,13 @@ public class Phone implements Comparable<Phone> {
     @JoinColumn(name = "distric_id", updatable = false)
     private District district;
 
+    public int getErrorNotificationCount() {
+        return errorNotificationCount;
+    }
+
+    public void setErrorNotificationCount(int errorNotificationCount) {
+        this.errorNotificationCount = errorNotificationCount;
+    }
 
     public Neighborhood getNeighborhood() {
         return neighborhood;
