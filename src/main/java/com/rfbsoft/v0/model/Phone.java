@@ -105,6 +105,6 @@ public class Phone implements Comparable<Phone> {
 
     @Override
     public int compareTo(Phone o) {
-        return (int) (this.getId()-o.getId());
+        return (int) (this.getId() - o.getId());
     }
 }

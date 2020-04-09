@@ -2,6 +2,7 @@ package com.rfbsoft.v0.controller;
 
 import com.rfbsoft.v0.Info;
 import com.rfbsoft.v0.exception.ProvinceNotFound;
+import com.rfbsoft.v0.managers.collator.LocaleCollator;
 import com.rfbsoft.v0.model.District;
 import com.rfbsoft.v0.model.Province;
 import com.rfbsoft.v0.response.SuccesResponse;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -36,6 +38,10 @@ public class DistrictController {
         return ResponseEntity.ok(new SuccesResponse(repo.findAll()));
     }
 
+
+    @Autowired
+    LocaleCollator collator;
+
     @GetMapping("/{id}")
     public ResponseEntity getOne(@PathVariable Long id) {
         boolean exist = provinceRepository.existsById(id);
@@ -46,11 +52,15 @@ public class DistrictController {
 
         Set districts = province.getDistricts();
         List districtList = new ArrayList();
-        districts.forEach((district)->{
+        districts.forEach((district) -> {
             districtList.add(district);
         });
 
-        districtList.sort(null);
+        districtList.sort((Comparator<District>) (o1, o2) -> {
+
+            return collator.getLocaleCollator().compare(o1.getName(), o2.getName());
+
+        });
 
         return ResponseEntity.ok(new SuccesResponse(districtList));
     }

@@ -14,11 +14,12 @@
 
         <div class="form-group">
             <label for="phoneNumber">Phone Number</label>
-            <input v-model = "phoneNumber" type="tel" class="form-control" id="phoneNumber" aria-describedby="emailHelp" placeholder="Enter Phone Number">
+            <input v-model="phoneNumber" type="tel" class="form-control" id="phoneNumber" aria-describedby="emailHelp"
+                   placeholder="Enter Phone Number">
         </div>
         <div class="form-group">
             <label for="phoneName">Phone Name</label>
-            <input v-model = "phoneName" type="text" class="form-control" id="phoneName" placeholder="Enter Phone Name">
+            <input v-model="phoneName" type="text" class="form-control" id="phoneName" placeholder="Enter Phone Name">
         </div>
         <div class="form-group">
             <label for="province">Select Province</label>
@@ -30,7 +31,7 @@
         </div>
         <div class="form-group">
             <label for="district">Select District</label>
-            <select  id="district" v-model="selectedDistrict">
+            <select id="district" v-model="selectedDistrict">
                 <option v-for="district in provincesDistricts" v-bind:value="district">
                     {{ district.name }}
                 </option>
@@ -39,40 +40,43 @@
 
         <div class="form-group">
             <label for="category">Select Category</label>
-            <select  id="category" v-model="selectedCategory">
+            <select id="category" v-model="selectedCategory">
                 <option v-for="category in categories" v-bind:value="category">
                     {{ category.name }}
                 </option>
             </select>
         </div>
         <div class="row">
-            <textarea   v-if = "warningText" class="col alert alert-warning" role="alert">
+            <textarea v-if="warningText" class="col alert alert-warning" role="alert">
                 {{warningText}}
             </textarea>
 
         </div>
 
         <div class="row">
-            <textarea   v-if = "succes" class="col alert alert-success" role="alert">
+            <textarea v-if="succes" class="col alert alert-success" role="alert">
                 {{succes}}
             </textarea>
 
         </div>
 
-        <button :disabled = "!(phoneNumber && phoneName) " v-on:click="send()" class="btn btn-primary">Send</button>
+        <button :disabled="!(phoneNumber && phoneName) " v-on:click="send()" class="btn btn-primary">Send</button>
     </form>
 </div>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156169587-2"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-156169587-2');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-156169587-2');
 </script>
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>

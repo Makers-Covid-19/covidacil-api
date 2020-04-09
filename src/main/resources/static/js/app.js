@@ -1,4 +1,3 @@
-
 var apiVersion = "v0";
 var adress = /api/ + apiVersion;
 
@@ -6,31 +5,31 @@ var app = new Vue({
     el: '#app',
     data: {
 
-        warningText : "",
+        warningText: "",
 
-        phoneNumber : "",
-        phoneName : "",
+        phoneNumber: "",
+        phoneName: "",
 
-        selectedProvince : {},
-        selectedDistrict : {},
+        selectedProvince: {},
+        selectedDistrict: {},
         selectedCategory: {},
 
         categories: [],
-        provinces : [],
-        provincesDistricts : [],
+        provinces: [],
+        provincesDistricts: [],
 
-        succes : ""
+        succes: ""
 
     },
-    mounted (){
-      this.loadProvinces();
-      this.loadCategories();
+    mounted() {
+        this.loadProvinces();
+        this.loadCategories();
     },
-    methods : {
-        loadProvinces(){
+    methods: {
+        loadProvinces() {
             var self = this;
 
-            axios.get(adress+ "/provinces")
+            axios.get(adress + "/provinces")
                 .then(function (response) {
                     self.provinces = response.data.data;
 
@@ -44,14 +43,13 @@ var app = new Vue({
                 });
         },
 
-        loadDistricts(){
+        loadDistricts() {
             var self = this;
 
 
-            axios.get(adress+ "/districts/" + self.selectedProvince.id)
+            axios.get(adress + "/districts/" + self.selectedProvince.id)
                 .then(function (response) {
                     self.provincesDistricts = response.data.data;
-
 
 
                 })
@@ -63,10 +61,10 @@ var app = new Vue({
                     // always executed
                 });
         },
-        loadCategories(){
+        loadCategories() {
             var self = this;
 
-            axios.get(adress+ "/categories")
+            axios.get(adress + "/categories")
                 .then(function (response) {
                     self.categories = response.data.data;
 
@@ -105,35 +103,33 @@ var app = new Vue({
             var error = false;
             self.warningText = "";
 
-            if(sendingPhone.name == ""){
+            if (sendingPhone.name == "") {
                 error = true;
                 self.warningText += "Please set phone name \n";
             }
-            if(sendingPhone.phoneNumber.length != 11){
+            if (sendingPhone.phoneNumber.length != 11) {
                 error = true;
                 self.warningText += "Please Enter True Phone number Phone number lenght equal 11 \n";
             }
-            if(sendingPhone.provinceId != undefined || sendingPhone.districtId  != undefined){
+            if (sendingPhone.provinceId != undefined || sendingPhone.districtId != undefined) {
 
-            }
-            else{
+            } else {
                 error = true;
                 self.warningText += "Please enter Province or Distric \n";
             }
-            if(sendingPhone.categoryId == undefined){
+            if (sendingPhone.categoryId == undefined) {
                 error = true;
                 self.warningText += "Please Enter Category \n";
             }
 
-            if(error){
+            if (error) {
 
-            }
-            else{
+            } else {
 
                 axios.post(adress + '/phones', sendingPhone)
                     .then(function (response) {
-                        if(response.data.message == "succes")
-                        self.succes = "Succesfuly Created";
+                        if (response.data.message == "succes")
+                            self.succes = "Succesfuly Created";
                         self.phoneName = "";
                         self.phoneNumber = "";
                     })
